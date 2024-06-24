@@ -98,7 +98,7 @@ public class ReedBlock extends BambooBlock
     }
 
     @Override
-	protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
+    protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
     {
         if (!state.canPlaceAt(world, pos))
         {
@@ -123,8 +123,8 @@ public class ReedBlock extends BambooBlock
             }
         }
 
-		return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-	}
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
 
     private boolean isValidBottomBlock(BlockView world, BlockPos pos)
     {
