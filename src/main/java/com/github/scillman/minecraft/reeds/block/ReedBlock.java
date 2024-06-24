@@ -30,7 +30,7 @@ public class ReedBlock extends BambooBlock
     public ReedBlock(Settings settings)
     {
         super(settings);
-        setDefaultState(getDefaultState().with(TOP, false));
+        setDefaultState(getDefaultState().with(TOP, true));
     }
 
     @Override
