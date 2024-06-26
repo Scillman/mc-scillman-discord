@@ -13,8 +13,6 @@ import net.minecraft.entity.player.PlayerEntity;
 
 import org.jetbrains.annotations.Nullable;
 
-import static com.github.scillman.minecraft.player_tier.PlayerTier.LOGGER;
-
 @Environment(EnvType.CLIENT)
 public class TierTagger
 {
@@ -103,8 +101,6 @@ public class TierTagger
      */
     public static Text appendTier(PlayerEntity player, Text text)
     {
-        LOGGER.info("Add tier to player name!");
-
         String playerName = player.getName().getString();
 
         @Nullable MutableText tier = getPlayerTier(playerName);
@@ -118,9 +114,7 @@ public class TierTagger
             tier = Text.literal("★ ").append(tier);
         }
 
-        Text result = tier.append(Text.literal(" | ").setStyle(Style.EMPTY.withColor(Formatting.GRAY))).append(text);
-        LOGGER.info(result.toString());
-        return result;
+        return tier.append(Text.literal(" | ").setStyle(Style.EMPTY.withColor(Formatting.GRAY))).append(text);
     }
 
     /**
@@ -138,9 +132,7 @@ public class TierTagger
             int color = getTierColor(tier);
 
             MutableText suffix = Text.literal(strTier);
-            //suffix.setStyle(Style.EMPTY.withColor(Formatting.byColorIndex(color))); // <-- This seems to fail?
             suffix.setStyle(Style.EMPTY.withColor(color));
-
             return suffix;
         }
 
@@ -168,24 +160,24 @@ public class TierTagger
     {
         switch (tier)
         {
-            case Tier.RHT2: return rgb(255, 165, 0); // 16753920        <-- INVALID
-            case Tier.HT3:  return rgb(218, 165, 32); // 14329120       <-- INVALID
+            case Tier.RHT2: return rgb(255, 165, 0); // 16753920
+            case Tier.HT3:  return rgb(218, 165, 32); // 14329120
             case Tier.LT3:
-            case Tier.RLT1: return rgb(238, 232, 170); // 15657130      <-- INVALID
-            case Tier.LT1:  return rgb(255, 182, 193); // 16758465      <-- INVALID
+            case Tier.RLT1: return rgb(238, 232, 170); // 15657130
+            case Tier.LT1:  return rgb(255, 182, 193); // 16758465
             case Tier.HT1:
-            case Tier.RHT1: return rgb(255, 0, 0); // 16711680          <-- INVALID
+            case Tier.RHT1: return rgb(255, 0, 0); // 16711680
             case Tier.LT2:
-            case Tier.RLT2: return rgb(255, 228, 181); // 16770229      <-- INVALID
-            case Tier.HT0:  return rgb(173, 216, 230); // 11393254      <-- INVALID
-            case Tier.HT4:  return rgb(  0, 100,   0); // 25600         <-- INVALID
-            case Tier.LT4:  return rgb(144, 238, 144); // 9498256       <-- INVALID
-            case Tier.LT5:  return rgb(211, 211, 211); // 13882323      <-- INVALID
-            case Tier.HT5:  return rgb(128, 128, 128); // 8421504       <-- INVALID
+            case Tier.RLT2: return rgb(255, 228, 181); // 16770229
+            case Tier.HT0:  return rgb(173, 216, 230); // 11393254
+            case Tier.HT4:  return rgb(  0, 100,   0); // 25600
+            case Tier.LT4:  return rgb(144, 238, 144); // 9498256
+            case Tier.LT5:  return rgb(211, 211, 211); // 13882323
+            case Tier.HT5:  return rgb(128, 128, 128); // 8421504
 
             default:
                 assert(tier == Tier.DEFAULT);
-                return rgb(255, 0, 0); // rgb(255, 255, 255);
+                return rgb(255, 255, 255);
         }
     }
 
