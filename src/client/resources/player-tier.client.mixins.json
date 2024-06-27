@@ -3,6 +3,7 @@
     "package": "com.github.scillman.minecraft.player_tier.mixin.client",
     "compatibilityLevel": "JAVA_21",
     "client": [
+        "MinecraftClientMixin",
         "PlayerEntityRendererMixin",
         "SplashOverlayMixin"
     ],
