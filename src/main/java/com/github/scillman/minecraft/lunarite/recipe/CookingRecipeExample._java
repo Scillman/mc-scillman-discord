@@ -1,0 +1,16 @@
+package com.github.scillman.minecraft.lunarite.recipe;
+
+import net.minecraft.recipe.RecipeSerializer;
+
+public class CookingRecipeExample
+{
+    public static final RecipeSerializer<TestRecipe> TEST_RECIPE_SERIALIZER;
+ 
+    static {
+        TEST_RECIPE_SERIALIZER = Registry.register(
+            Registry.RECIPE_SERIALIZER,
+            new Identifier(MODID, "test_furnace"),
+            new CookingRecipeSerializer<>(TestRecipe::new, 200)
+        );
+    }
+}
