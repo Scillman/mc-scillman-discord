@@ -1,0 +1,41 @@
+{
+    "schemaVersion": 1,
+    "id": "discord",
+    "version": "${version}",
+    "name": "Discord",
+    "description": "Example project",
+    "authors": [
+        "Scillman"
+    ],
+    "contact": {
+        "homepage": "https://fabricmc.net/",
+        "sources": "https://github.com/Scillman/"
+    },
+    "license": "MIT",
+    "icon": "assets/discord/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.github.scillman.minecraft.discord.Discord"
+        ],
+        "client": [
+            "com.github.scillman.minecraft.discord.DiscordClient"
+        ],
+        "fabric-datagen": [
+            "com.github.scillman.minecraft.discord.DiscordDataGenerator"
+        ]
+    },
+    "mixins": [
+        "discord.mixins.json",
+        {
+            "config": "discord.client.mixins.json",
+            "environment": "client"
+        }
+    ],
+    "depends": {
+        "fabricloader": ">=0.15.11",
+        "minecraft": "~1.21",
+        "java": ">=21",
+        "fabric-api": "*"
+    }
+}
