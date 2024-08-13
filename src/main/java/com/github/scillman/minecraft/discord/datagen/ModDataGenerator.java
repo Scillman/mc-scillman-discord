@@ -1,9 +1,9 @@
-package com.github.scillman.minecraft.discord;
+package com.github.scillman.minecraft.discord.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
-public class DiscordDataGenerator implements DataGeneratorEntrypoint
+public class ModDataGenerator implements DataGeneratorEntrypoint
 {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator)
