@@ -1,7 +1,7 @@
 {
     "required": true,
     "package": "com.github.scillman.minecraft.discord.mixin",
-    "compatibilityLevel": "JAVA_21",
+    "compatibilityLevel": "JAVA_${java_version}",
     "mixins": [],
     "injectors": {
         "defaultRequire": 1
