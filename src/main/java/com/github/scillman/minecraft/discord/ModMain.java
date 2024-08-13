@@ -14,6 +14,9 @@ public class ModMain implements ModInitializer
 
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
+    /**
+     * Mod entry point called by the loader.
+     */
     @Override
     public void onInitialize()
     {
