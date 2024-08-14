@@ -36,7 +36,7 @@ public class ModMain implements ModInitializer
     {
         ModItems.register();
 
-        UseEntityCallback.EVENT.register(ModMain::onUseOnEntity);
+        //UseEntityCallback.EVENT.register(ModMain::onUseOnEntity);
     }
 
     private static ActionResult onUseOnEntity(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult)
