@@ -5,13 +5,20 @@ import org.slf4j.LoggerFactory;
 
 import net.fabricmc.api.ModInitializer;
 
-public class Discord implements ModInitializer
+/**
+ * Contains the common code of the mod.
+ */
+public class ModMain implements ModInitializer
 {
     public static final String MOD_ID = "discord";
     public static final String MOD_NAME = "Discord";
 
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
+    /**
+     * The mod's main entry point.
+     * @remarks Called by the mod loader.
+     */
     @Override
     public void onInitialize()
     {

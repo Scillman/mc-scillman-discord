@@ -17,13 +17,13 @@
     "accessWidener" : "discord.accesswidener",
     "entrypoints": {
         "main": [
-            "com.github.scillman.minecraft.discord.Discord"
+            "com.github.scillman.minecraft.discord.ModMain"
         ],
         "client": [
-            "com.github.scillman.minecraft.discord.DiscordClient"
+            "com.github.scillman.minecraft.discord.ModClient"
         ],
         "fabric-datagen": [
-            "com.github.scillman.minecraft.discord.DiscordDataGenerator"
+            "com.github.scillman.minecraft.discord.datagen.ModDataGenerator"
         ]
     },
     "mixins": [
