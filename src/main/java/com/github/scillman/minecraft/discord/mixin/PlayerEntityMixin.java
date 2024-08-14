@@ -33,7 +33,11 @@ public abstract class PlayerEntityMixin {
             return ActionResult.PASS;
         }
 
-        if (player.isSneaking() && player.getStackInHand(hand).getItem() instanceof CustomItem item) {
+        if (hand != Hand.MAIN_HAND) {
+            return ActionResult.PASS;
+        }
+
+        if (player.isSneaking() && player.getStackInHand(hand).getItem() instanceof CustomItem) {
             player.sendMessage(Text.of("1"), false);
             return ActionResult.SUCCESS;
         }
