@@ -21,6 +21,12 @@ loom {
             sourceSet sourceSets.client
         }
     }
+
+    runs {
+        datagen {
+            inherit client
+        }
+    }
 }
 
 fabricApi {
