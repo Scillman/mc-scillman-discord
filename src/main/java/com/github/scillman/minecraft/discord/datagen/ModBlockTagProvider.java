@@ -41,7 +41,6 @@ public class ModBlockTagProvider extends BlockTagProvider
             .setReplace(false)
             .addTag(VanillaBlockTags.NEEDS_NETHERITE_TOOL);
 
-        getOrCreateTagBuilder(VanillaBlockTags.NEEDS_NETHERITE_TOOL)
-            .add(Blocks.NETHERITE_BLOCK);
+        getOrCreateTagBuilder(VanillaBlockTags.NEEDS_NETHERITE_TOOL);
     }
 }
