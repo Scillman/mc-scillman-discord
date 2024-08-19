@@ -3,6 +3,10 @@ package com.github.scillman.minecraft.discord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.scillman.minecraft.discord.registry.ModBlocks;
+import com.github.scillman.minecraft.discord.registry.ModItems;
+import com.github.scillman.minecraft.discord.registry.VanillaBlockTags;
+
 import net.fabricmc.api.ModInitializer;
 
 /**
@@ -22,5 +26,9 @@ public class ModMain implements ModInitializer
     @Override
     public void onInitialize()
     {
+        VanillaBlockTags.register();
+
+        ModBlocks.register();
+        ModItems.register();
     }
 }
