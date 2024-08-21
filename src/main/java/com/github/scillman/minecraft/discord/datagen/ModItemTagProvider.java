@@ -7,6 +7,9 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider.ItemTagProv
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 
+/**
+ * Generates the mod's tag/items json files.
+ */
 public class ModItemTagProvider extends ItemTagProvider
 {
 

@@ -6,6 +6,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 
+/**
+ * Generates the English/US json language file.
+ */
 public class ModLanguageProvider extends FabricLanguageProvider
 {
     protected ModLanguageProvider(FabricDataOutput dataOutput, CompletableFuture<WrapperLookup> registryLookup)

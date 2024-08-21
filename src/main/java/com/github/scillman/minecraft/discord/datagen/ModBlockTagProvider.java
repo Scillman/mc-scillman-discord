@@ -6,11 +6,13 @@ import com.github.scillman.minecraft.discord.registry.VanillaBlockTags;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider.BlockTagProvider;
-import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.BlockTags;
 
+/**
+ * Generates the mod's tag/blocks json files.
+ */
 public class ModBlockTagProvider extends BlockTagProvider
 {
     public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> registriesFuture)
@@ -20,6 +22,15 @@ public class ModBlockTagProvider extends BlockTagProvider
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup)
+    {
+        createNeedsNetheriteToolJson(wrapperLookup);
+    }
+
+    /**
+     * Creates the needs_netherite_tool.json file.
+     * @param wrapperLookup
+     */
+    private void createNeedsNetheriteToolJson(RegistryWrapper.WrapperLookup wrapperLookup)
     {
         getOrCreateTagBuilder(BlockTags.INCORRECT_FOR_DIAMOND_TOOL)
             .setReplace(false)
