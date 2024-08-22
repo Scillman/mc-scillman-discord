@@ -53,7 +53,8 @@ public class ModBlockTagProvider extends BlockTagProvider
             .setReplace(false)
             .addTag(VanillaBlockTags.NEEDS_NETHERITE_TOOL);
 
-        getOrCreateTagBuilder(VanillaBlockTags.NEEDS_NETHERITE_TOOL);
+        getOrCreateTagBuilder(VanillaBlockTags.NEEDS_NETHERITE_TOOL)
+            .setReplace(false);
     }
 
     /**
@@ -62,9 +63,16 @@ public class ModBlockTagProvider extends BlockTagProvider
      */
     private void createMineables(RegistryWrapper.WrapperLookup wrapperLookup)
     {
-        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE);
-        getOrCreateTagBuilder(BlockTags.HOE_MINEABLE);
-        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE);
-        getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE);
+        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
+            .setReplace(false);
+
+        getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
+            .setReplace(false);
+
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+            .setReplace(false);
+
+        getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE)
+            .setReplace(false);
     }
 }
