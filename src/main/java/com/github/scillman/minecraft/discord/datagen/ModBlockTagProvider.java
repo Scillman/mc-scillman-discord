@@ -24,6 +24,7 @@ public class ModBlockTagProvider extends BlockTagProvider
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup)
     {
         createNeedsNetheriteToolJson(wrapperLookup);
+        createMineables(wrapperLookup);
     }
 
     /**
@@ -53,5 +54,17 @@ public class ModBlockTagProvider extends BlockTagProvider
             .addTag(VanillaBlockTags.NEEDS_NETHERITE_TOOL);
 
         getOrCreateTagBuilder(VanillaBlockTags.NEEDS_NETHERITE_TOOL);
+    }
+
+    /**
+     * Creates the mineable jsons files.
+     * @param wrapperLookup
+     */
+    private void createMineables(RegistryWrapper.WrapperLookup wrapperLookup)
+    {
+        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE);
+        getOrCreateTagBuilder(BlockTags.HOE_MINEABLE);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE);
+        getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE);
     }
 }
