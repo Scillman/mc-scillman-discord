@@ -1,7 +1,9 @@
 package com.github.scillman.minecraft.discord.registry;
 
 import com.github.scillman.minecraft.discord.ModMain;
+import com.github.scillman.minecraft.discord.block.CustomBlock;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -14,6 +16,8 @@ import net.minecraft.util.Identifier;
  */
 public final class ModBlocks
 {
+    private static final CustomBlock CUSTOM_BLOCK = register("custom_block", new CustomBlock(AbstractBlock.Settings.create()));
+
     /**
      * Register a custom block.
      * @param <T> The type of the block to register.
