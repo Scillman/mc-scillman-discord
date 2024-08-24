@@ -1,6 +1,7 @@
 package com.github.scillman.minecraft.discord.registry;
 
 import com.github.scillman.minecraft.discord.ModMain;
+import com.github.scillman.minecraft.discord.item.DemoItem;
 
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registry;
@@ -12,16 +13,31 @@ import net.minecraft.registry.Registries;
  */
 public final class ModItems
 {
+    public static final DemoItem DEMO_ITEM = register("demo_item", DemoItem::new);
+
     /**
      * Register a custom item.
      * @param <T> The type of the item to register.
      * @param id The id to register the item with.
-     * @param item The item that has to be registered.
+     * @param factory The function to call to create an instance of the item.
      * @return The instance as registered with Minecraft registry.
      */
-    private static <T extends Item> T register(String id, T item)
+    private static <T extends Item> T register(String id, ItemCreateFactory<T> factory)
     {
-        return Registry.register(Registries.ITEM, Identifier.of(ModMain.MOD_ID, id), item);
+        return register(id, factory, new Item.Settings());
+    }
+
+    /**
+     * Register a custom item.
+     * @param <T> The type of the item to register.
+     * @param id The id to register the item with.
+     * @param factory The function to call to create an instance of the item.
+     * @param settings The item settings to use for the item.
+     * @return The instance as registered with Minecraft registry.
+     */
+    private static <T extends Item> T register(String id, ItemCreateFactory<T> factory, Item.Settings settings)
+    {
+        return Registry.register(Registries.ITEM, Identifier.of(ModMain.MOD_ID, id), factory.create(settings));
     }
 
     /**
@@ -30,5 +46,13 @@ public final class ModItems
      */
     public static void register()
     {
+    }
+
+    /**
+     * Interface for item instance creation.
+     */
+    private interface ItemCreateFactory<T extends Item>
+    {
+        T create(Item.Settings settings);
     }
 }

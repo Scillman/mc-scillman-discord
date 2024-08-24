@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "discord:demo_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "discord:demo_item"
+  }
+}

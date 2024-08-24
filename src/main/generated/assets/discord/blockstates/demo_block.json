@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "discord:block/demo_block"
+    }
+  }
+}

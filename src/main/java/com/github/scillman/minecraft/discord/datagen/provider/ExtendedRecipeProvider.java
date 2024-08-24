@@ -1,4 +1,4 @@
-package com.github.scillman.minecraft.discord.datagen;
+package com.github.scillman.minecraft.discord.datagen.provider;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

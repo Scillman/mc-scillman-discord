@@ -2,6 +2,7 @@ package com.github.scillman.minecraft.discord.datagen;
 
 import java.util.concurrent.CompletableFuture;
 
+import com.github.scillman.minecraft.discord.registry.ModBlocks;
 import com.github.scillman.minecraft.discord.registry.VanillaBlockTags;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -54,7 +55,8 @@ public class ModBlockTagProvider extends BlockTagProvider
             .addTag(VanillaBlockTags.NEEDS_NETHERITE_TOOL);
 
         getOrCreateTagBuilder(VanillaBlockTags.NEEDS_NETHERITE_TOOL)
-            .setReplace(false);
+            .setReplace(false)
+            .add(ModBlocks.DEMO_BLOCK);
     }
 
     /**
@@ -70,7 +72,8 @@ public class ModBlockTagProvider extends BlockTagProvider
             .setReplace(false);
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-            .setReplace(false);
+            .setReplace(false)
+            .add(ModBlocks.DEMO_BLOCK);
 
         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE)
             .setReplace(false);

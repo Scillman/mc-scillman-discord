@@ -1,1 +1,6 @@
-{}
+{
+  "block.discord.demo_block": "Demo Block",
+  "item.discord.demo_item": "Demo Item",
+  "itemGroup.discord.demo_item_group": "Mod Items",
+  "sound.discord.demo_sound_subtitle": "Demo Sound Subtitle"
+}
