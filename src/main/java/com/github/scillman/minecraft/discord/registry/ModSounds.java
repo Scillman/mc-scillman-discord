@@ -14,8 +14,8 @@ public final class ModSounds
 {
     public static final SoundEvent DEMO_SOUND = register("demo_sound");
     public static final Identifier DEMO_SOUND_SUBTITLE = subtitle("demo_sound_subtitle");
-    public static final Identifier DEMO_SOUND_FILE_1 = soundFile("sound_file_ogg_1");
-    public static final Identifier DEMO_SOUND_FILE_2 = soundFile("sound_file_ogg_2");
+    public static final Identifier DEMO_SOUND_FILE_1 = soundFile("demo_sound_file_1");
+    public static final Identifier DEMO_SOUND_FILE_2 = soundFile("demo_sound_file_2");
 
     /**
      * Register a sound event.

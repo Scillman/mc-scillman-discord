@@ -1,8 +1,8 @@
 {
   "demo_sound": {
     "sounds": [
-      "discord:sound_file_ogg_1",
-      "discord:sound_file_ogg_2"
+      "discord:demo_sound_file_1",
+      "discord:demo_sound_file_2"
     ],
     "subtitle": "sound.discord.demo_sound_subtitle"
   }

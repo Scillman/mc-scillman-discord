@@ -154,7 +154,7 @@ public abstract class SoundProvider implements DataProvider
 
         public SoundEntry build()
         {
-            if (this.sounds.size() <= 1)
+            if (this.sounds.size() < 1)
             {
                 throw new IllegalStateException("Must have at least one sound file specified.");
             }

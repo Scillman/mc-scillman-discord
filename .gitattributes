@@ -17,5 +17,6 @@
 
 # Binary
 *.jar           binary
+*.ogg           binary
 *.png           binary
 *.xcf           binary
