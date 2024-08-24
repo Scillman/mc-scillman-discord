@@ -16,7 +16,8 @@ import net.minecraft.util.Identifier;
  */
 public final class ModBlocks
 {
-    public static final DemoBlock DEMO_BLOCK = register("demo_block", DemoBlock::new);
+    public static final DemoBlock DEMO_BLOCK = register("demo_block", DemoBlock::new,
+        AbstractBlock.Settings.create().requiresTool().hardness(8.0f));
 
     /**
      * Register a custom block.

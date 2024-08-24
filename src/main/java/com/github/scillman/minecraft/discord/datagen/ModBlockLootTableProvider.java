@@ -3,6 +3,7 @@ package com.github.scillman.minecraft.discord.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.github.scillman.minecraft.discord.registry.ModBlocks;
+import com.github.scillman.minecraft.discord.registry.ModItems;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
@@ -21,6 +22,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider
     @Override
     public void generate()
     {
-        addDrop(ModBlocks.DEMO_BLOCK);
+        addDrop(ModBlocks.DEMO_BLOCK, this.oreDrops(ModBlocks.DEMO_BLOCK, ModItems.DEMO_ITEM));
     }
 }
