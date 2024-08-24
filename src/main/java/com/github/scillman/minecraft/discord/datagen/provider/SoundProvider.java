@@ -108,7 +108,12 @@ public abstract class SoundProvider implements DataProvider
         return new SoundEntry(entry.replace, entry.subtitle, sounds);
     }
 
-    public record SoundEntry(boolean replace, String subtitle, List<Identifier> sounds)
+    public Builder createBuilder()
+    {
+        return new Builder(this.namespace);
+    }
+
+    private record SoundEntry(boolean replace, String subtitle, List<Identifier> sounds)
     {
         public static final Codec<SoundEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.optionalFieldOf("replace", false).forGetter(SoundEntry::replace),
@@ -119,12 +124,14 @@ public abstract class SoundProvider implements DataProvider
 
     public class Builder
     {
+        private String namespace;
         private boolean replace;
         private String subtitle;
         private List<Identifier> sounds;
 
-        public Builder()
+        Builder(String namespace)
         {
+            this.namespace = namespace;
             this.replace = false;
             this.subtitle = "";
             this.sounds = new ArrayList<Identifier>();
@@ -136,10 +143,20 @@ public abstract class SoundProvider implements DataProvider
             return this;
         }
 
+        public Builder setSubtitle(String subtitle)
+        {
+            return setSubtitle(Identifier.of(this.namespace, subtitle));
+        }
+
         public Builder setSubtitle(Identifier subtitle)
         {
             this.subtitle = subtitle.toTranslationKey("sound");
             return this;
+        }
+
+        public Builder addSound(String id)
+        {
+            return addSound(Identifier.of(this.namespace, id));
         }
 
         public Builder addSound(Identifier id)
