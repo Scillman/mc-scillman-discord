@@ -2,7 +2,8 @@
   "demo_sound": {
     "sounds": [
       "discord:demo_sound_file_1",
-      "discord:demo_sound_file_2"
+      "discord:demo_sound_file_2",
+      "minecraft:block/amethyst/break1"
     ],
     "subtitle": "sound.discord.demo_sound"
   }
