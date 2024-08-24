@@ -105,7 +105,7 @@ public abstract class SoundProvider implements DataProvider
             }
         }
 
-        return new SoundEntry(entry.replace, key, sounds);
+        return new SoundEntry(entry.replace, entry.subtitle, sounds);
     }
 
     public record SoundEntry(boolean replace, String subtitle, List<Identifier> sounds)
