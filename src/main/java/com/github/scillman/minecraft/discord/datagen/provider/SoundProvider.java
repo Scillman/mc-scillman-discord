@@ -32,11 +32,11 @@ public abstract class SoundProvider implements DataProvider
     private final String namespace;
     private final Hashtable<String, SoundEntry> entries;
 
-    public SoundProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture, String modId)
+    public SoundProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture, String namespace)
     {
         this.output = output;
         this.registryLookupFuture = registriesFuture;
-        this.namespace = modId;
+        this.namespace = namespace;
         this.entries = new Hashtable<>();
     }
 
