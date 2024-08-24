@@ -29,7 +29,7 @@ public class ModLanguageProvider extends FabricLanguageProvider
     public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder)
     {
         addItemGroup(translationBuilder, ModItemGroups.DEMO_ITEM_GROUP, "Mod Items");
-        addSoundSubtitle(translationBuilder, ModSounds.DEMO_SOUND, "Demo Sound Subtitle");
+        addSoundEvent(translationBuilder, ModSounds.DEMO_SOUND, "Demo Sound Subtitle");
 
         translationBuilder.add(ModBlocks.DEMO_BLOCK, "Demo Block");
         translationBuilder.add(ModItems.DEMO_ITEM, "Demo Item");
@@ -52,7 +52,7 @@ public class ModLanguageProvider extends FabricLanguageProvider
      * @param soundEvent The sound event to create the subtitle for.
      * @param subtitle The subtitle text.
      */
-    private void addSoundSubtitle(TranslationBuilder translationBuilder, SoundEvent soundEvent, String subtitle)
+    private void addSoundEvent(TranslationBuilder translationBuilder, SoundEvent soundEvent, String subtitle)
     {
         translationBuilder.add(soundEvent.getId().toTranslationKey(ModConstants.SOUND_SUBTITLE_TRANSLATION_PREFIX), subtitle);
     }

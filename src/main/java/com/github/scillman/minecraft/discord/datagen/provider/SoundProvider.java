@@ -114,8 +114,7 @@ public abstract class SoundProvider implements DataProvider
 
     public Builder getOrCreateBuilder(SoundEvent soundEvent)
     {
-        Identifier soundEventId = soundEvent.getId();
-        return this.builders.computeIfAbsent(soundEventId, id -> new Builder(this.namespace));
+        return this.builders.computeIfAbsent(soundEvent.getId(), id -> new Builder(this.namespace));
     }
 
     private record SoundEntry(boolean replace, String subtitle, List<Identifier> sounds)
