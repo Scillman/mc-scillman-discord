@@ -13,9 +13,6 @@ import net.minecraft.util.Identifier;
 public final class ModSounds
 {
     public static final SoundEvent DEMO_SOUND = register("demo_sound");
-    public static final Identifier DEMO_SOUND_SUBTITLE = subtitle("demo_sound_subtitle");
-    public static final Identifier DEMO_SOUND_FILE_1 = soundFile("demo_sound_file_1");
-    public static final Identifier DEMO_SOUND_FILE_2 = soundFile("demo_sound_file_2");
 
     /**
      * Register a sound event.
@@ -26,26 +23,6 @@ public final class ModSounds
     {
         Identifier guid = Identifier.of(ModMain.MOD_ID, id);
         return Registry.register(Registries.SOUND_EVENT, guid, SoundEvent.of(guid));
-    }
-
-    /**
-     * Create an identifier for the sound's subtitle.
-     * @param id The subtitle id.
-     * @return The identifier associated with the id.
-     */
-    private static Identifier subtitle(String id)
-    {
-        return Identifier.of(ModMain.MOD_ID, id);
-    }
-
-    /**
-     * Create an identifier for the sound file.
-     * @param fileName The name of the sound file.
-     * @return The identifier associated with the sound file.
-     */
-    private static Identifier soundFile(String fileName)
-    {
-        return Identifier.of(ModMain.MOD_ID, fileName);
     }
 
     /**

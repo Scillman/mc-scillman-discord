@@ -20,11 +20,10 @@ public class ModSoundProvider extends SoundProvider
     protected void generate()
     {
         addSoundEvent(ModSounds.DEMO_SOUND,
-            createBuilder()
+            createBuilder(true)
                 .setReplace(false)
-                .setSubtitle(ModSounds.DEMO_SOUND_SUBTITLE)
-                .addSound(ModSounds.DEMO_SOUND_FILE_1)
-                .addSound(ModSounds.DEMO_SOUND_FILE_2)
+                .addSound("demo_sound_file_1")
+                .addSound("demo_sound_file_2")
         );
     }
 }

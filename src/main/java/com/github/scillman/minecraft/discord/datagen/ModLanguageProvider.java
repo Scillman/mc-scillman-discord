@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 /**
@@ -28,7 +29,7 @@ public class ModLanguageProvider extends FabricLanguageProvider
     public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder)
     {
         addItemGroup(translationBuilder, ModItemGroups.DEMO_ITEM_GROUP, "Mod Items");
-        addSoundSubtitle(translationBuilder, ModSounds.DEMO_SOUND_SUBTITLE, "Demo Sound Subtitle");
+        addSoundSubtitle(translationBuilder, ModSounds.DEMO_SOUND, "Demo Sound Subtitle");
 
         translationBuilder.add(ModBlocks.DEMO_BLOCK, "Demo Block");
         translationBuilder.add(ModItems.DEMO_ITEM, "Demo Item");
@@ -48,11 +49,11 @@ public class ModLanguageProvider extends FabricLanguageProvider
     /**
      * Add a sound subtitle to the translation.
      * @param translationBuilder The translation builder.
-     * @param subtitleId The identifier of the subtitle.
+     * @param soundEvent The sound event to create the subtitle for.
      * @param subtitle The subtitle text.
      */
-    private void addSoundSubtitle(TranslationBuilder translationBuilder, Identifier subtitleId, String subtitle)
+    private void addSoundSubtitle(TranslationBuilder translationBuilder, SoundEvent soundEvent, String subtitle)
     {
-        translationBuilder.add(subtitleId.toTranslationKey(ModConstants.SOUND_SUBTITLE_TRANSLATION_PREFIX), subtitle);
+        translationBuilder.add(soundEvent.getId().toTranslationKey(ModConstants.SOUND_SUBTITLE_TRANSLATION_PREFIX), subtitle);
     }
 }

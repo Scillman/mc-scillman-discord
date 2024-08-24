@@ -25,7 +25,7 @@ import java.util.Map;
 
 public abstract class SoundProvider implements DataProvider
 {
-    final Codec<Map<String, SoundEntry>> CODEC = Codec.unboundedMap(Codec.STRING, SoundEntry.CODEC);
+    private final Codec<Map<String, SoundEntry>> CODEC = Codec.unboundedMap(Codec.STRING, SoundEntry.CODEC);
 
     private final FabricDataOutput output;
     private final CompletableFuture<RegistryWrapper.WrapperLookup> registryLookupFuture;
@@ -79,8 +79,9 @@ public abstract class SoundProvider implements DataProvider
 
     protected void addSoundEvent(SoundEvent soundEvent, Builder builder)
     {
-        String key = soundEvent.getId().getPath();
-        SoundEntry entry = builder.build();
+        Identifier soundEventId = soundEvent.getId();
+        String key = soundEventId.getPath();
+        SoundEntry entry = builder.build(soundEventId);
 
         if (this.entries.containsKey(key))
         {
@@ -110,7 +111,12 @@ public abstract class SoundProvider implements DataProvider
 
     public Builder createBuilder()
     {
-        return new Builder(this.namespace);
+        return createBuilder(false);
+    }
+
+    public Builder createBuilder(boolean useDefaultSubtitle)
+    {
+        return new Builder(this.namespace, useDefaultSubtitle);
     }
 
     private record SoundEntry(boolean replace, String subtitle, List<Identifier> sounds)
@@ -125,13 +131,15 @@ public abstract class SoundProvider implements DataProvider
     public class Builder
     {
         private String namespace;
+        private boolean useDefaultSubtitle;
         private boolean replace;
         private String subtitle;
         private List<Identifier> sounds;
 
-        Builder(String namespace)
+        Builder(String namespace, boolean useDefaultSubtitle)
         {
             this.namespace = namespace;
+            this.useDefaultSubtitle = useDefaultSubtitle;
             this.replace = false;
             this.subtitle = "";
             this.sounds = new ArrayList<Identifier>();
@@ -169,11 +177,16 @@ public abstract class SoundProvider implements DataProvider
             return this;
         }
 
-        public SoundEntry build()
+        SoundEntry build(Identifier soundEventId)
         {
             if (this.sounds.size() < 1)
             {
                 throw new IllegalStateException("Must have at least one sound file specified.");
+            }
+
+            if (this.subtitle.isEmpty() && this.useDefaultSubtitle)
+            {
+                setSubtitle(soundEventId);
             }
 
             return new SoundEntry(this.replace, this.subtitle, this.sounds);
