@@ -35,7 +35,7 @@ public final class ModBlocks
      * Register a custom block.
      * @param <T> The type of the block to register.
      * @param id The id to register the block with.
-     * @param factory factory The function to call to create an instance of the block.
+     * @param factory The function to call to create an instance of the block.
      * @param registerItem Set to true to register a {@link net.minecraft.item.BlockItem BlockItem} for the block; otherwise, false.
      * @return The instance as registered with Minecraft registry.
      */
@@ -48,7 +48,7 @@ public final class ModBlocks
      * Register a custom block.
      * @param <T> The type of the block to register.
      * @param id The id to register the block with.
-     * @param factory factory The function to call to create an instance of the block.
+     * @param factory The function to call to create an instance of the block.
      * @param settings The block settings to use.
      * @return The instance as registered with Minecraft registry.
      */
@@ -61,23 +61,36 @@ public final class ModBlocks
      * Register a custom block.
      * @param <T> The type of the block to register.
      * @param id The id to register the block with.
-     * @param factory factory The function to call to create an instance of the block.
+     * @param factory The function to call to create an instance of the block.
      * @param settings The block settings to use.
      * @param registerItem Set to true to register a {@link net.minecraft.item.BlockItem BlockItem} for the block; otherwise, false.
      * @return The instance as registered with Minecraft registry.
      */
     private static <T extends Block> T register(String id, BlockCreateFactory<T> factory, AbstractBlock.Settings settings, boolean registerItem)
     {
+        return register(id, factory.create(settings), registerItem);
+    }
+
+    /**
+     * Register a custom block.
+     * @param <T> The type of the block to register.
+     * @param id The id to register the block with.
+     * @param block The block to register.
+     * @param registerItem Set to true to register a {@link net.minecraft.item.BlockItem BlockItem} for the block; otherwise, false.
+     * @return The instance as registered with Minecraft registry.
+     */
+    private static <T extends Block> T register(String id, T block, boolean registerItem)
+    {
         Identifier guid = Identifier.of(ModMain.MOD_ID, id);
 
-        T block = Registry.register(Registries.BLOCK, guid, factory.create(settings));
+        T instance = Registry.register(Registries.BLOCK, guid, block);
 
         if (registerItem)
         {
-            Registry.register(Registries.ITEM, guid, new BlockItem(block, new Item.Settings()));
+            Registry.register(Registries.ITEM, guid, new BlockItem(instance, new Item.Settings()));
         }
 
-        return block;
+        return instance;
     }
 
     /**

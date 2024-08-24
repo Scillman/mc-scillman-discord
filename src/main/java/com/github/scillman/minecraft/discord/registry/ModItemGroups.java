@@ -22,16 +22,16 @@ import net.minecraft.util.Identifier;
  */
 public final class ModItemGroups
 {
-    public static final Identifier DEMO_ITEM_GROUP = register("demo_item_group", ModItems.DEMO_ITEM, ModItemGroups::addToCustomItemGroup);
+    public static final RegistryKey<ItemGroup> DEMO_ITEM_GROUP = register("demo_item_group", ModItems.DEMO_ITEM, ModItemGroups::addToCustomItemGroup);
 
     /**
      * Register a new item group.
      * @param id The id of the item group.
      * @param icon The item to as the group icon.
      * @param listener The function to execute to add items to the group.
-     * @return The identifier the group was registered with.
+     * @return The key the group was registered with.
      */
-    private static Identifier register(String id, ItemConvertible icon, ItemGroupEvents.ModifyEntries listener)
+    private static RegistryKey<ItemGroup> register(String id, ItemConvertible icon, ItemGroupEvents.ModifyEntries listener)
     {
         Identifier guid = Identifier.of(ModMain.MOD_ID, id);
 
@@ -43,8 +43,7 @@ public final class ModItemGroups
 
         RegistryKey<ItemGroup> key = RegistryKey.of(RegistryKeys.ITEM_GROUP, guid);
         ItemGroupEvents.modifyEntriesEvent(key).register(listener);
-
-        return guid;
+        return key;
     }
 
     /**

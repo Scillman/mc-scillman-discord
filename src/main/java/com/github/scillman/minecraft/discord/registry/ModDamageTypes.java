@@ -12,6 +12,8 @@ import net.minecraft.util.Identifier;
  */
 public final class ModDamageTypes
 {
+    public static final RegistryKey<DamageType> DEMO_DAMAGE_TYPE_1 = register("demo_damage_type_1");
+    public static final RegistryKey<DamageType> DEMO_DAMAGE_TYPE_2 = register("demo_damage_type_2");
 
     /**
      * Registers a custom damage type.

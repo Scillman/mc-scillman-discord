@@ -1,5 +1,8 @@
 {
   "block.discord.demo_block": "Demo Block",
+  "death.attack.demo_damage_type_1": "Demo Damage Type",
+  "death.attack.demo_damage_type_2": "Demo Damage Type (2)",
+  "effect.discord.demo_status_effect": "Demo Status Effect",
   "item.discord.demo_item": "Demo Item",
   "itemGroup.discord.demo_item_group": "Mod Items",
   "sound.discord.demo_sound": "Demo Sound Subtitle"

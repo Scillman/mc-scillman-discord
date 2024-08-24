@@ -134,7 +134,7 @@ public abstract class SoundProvider implements DataProvider
         private String subtitle;
         private List<Identifier> sounds;
 
-        Builder(String namespace)
+        /* internal */Builder(String namespace)
         {
             this.namespace = namespace;
             this.defaultSubtitle = false;
@@ -181,7 +181,7 @@ public abstract class SoundProvider implements DataProvider
             return this;
         }
 
-        SoundEntry build(Identifier soundEventId)
+        /* internal */SoundEntry build(Identifier soundEventId)
         {
             if (this.sounds.size() < 1)
             {
