@@ -18,9 +18,11 @@ public class ModDamageTypeProvider extends DamageTypeProvider
     @Override
     protected void generate()
     {
-        getOrCreateBuilder(ModDamageTypes.DEMO_DAMAGE_TYPE_1);
+        getOrCreateBuilder(ModDamageTypes.DEMO_DAMAGE_TYPE_1)
+            .bypassesArmor();
 
         getOrCreateBuilder(ModDamageTypes.DEMO_DAMAGE_TYPE_2)
-            .bypassArmor();
+            .isFire()
+            .burnsArmorStands();
     }
 }
