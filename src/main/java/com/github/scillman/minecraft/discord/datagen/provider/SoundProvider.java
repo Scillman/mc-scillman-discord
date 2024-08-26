@@ -32,7 +32,6 @@ public abstract class SoundProvider implements DataProvider
     private final String namespace;
 
     private final LinkedHashMap<Identifier, Builder> builders;
-    private final Hashtable<String, SoundEntry> entries;
 
     public SoundProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture, String namespace)
     {
@@ -40,7 +39,6 @@ public abstract class SoundProvider implements DataProvider
         this.registryLookupFuture = registriesFuture;
         this.namespace = namespace;
         this.builders = new LinkedHashMap<Identifier, Builder>();
-        this.entries = new Hashtable<String, SoundEntry>();
     }
 
     @Override
@@ -51,13 +49,37 @@ public abstract class SoundProvider implements DataProvider
 
     protected CompletableFuture<?> run(DataWriter writer, RegistryWrapper.WrapperLookup registryLookup)
     {
-        this.generate();
-        this.builders.forEach((soundEventId, builder) -> addEntry(soundEventId, builder));
+        generate();
+
+        final Hashtable<String, SoundEntry> entries = new Hashtable<String, SoundEntry>();
+
+        this.builders.forEach((soundEventId, builder) -> {
+            String key = soundEventId.getPath();
+            SoundEntry entry = builder.build(soundEventId);
+
+            if (entries.containsKey(key) == false) {
+                entries.put(key, entry);
+            }
+            else {
+                entries.merge(key, entry, (original, current) -> {
+                    List<Identifier> sounds = original.sounds();
+                    for (Identifier soundId: entry.sounds())
+                    {
+                        if (!sounds.contains(soundId))
+                        {
+                            sounds.add(soundId);
+                        }
+                    }
+
+                    return new SoundEntry(entry.replace, entry.subtitle, sounds);
+                });
+            }
+        });
 
         final List<CompletableFuture<?>> list = new ArrayList<CompletableFuture<?>>();
 
         RegistryOps<JsonElement> registryOps = registryLookup.getOps(JsonOps.INSTANCE);
-        JsonObject root = CODEC.encodeStart(registryOps, this.entries).getOrThrow(IllegalStateException::new).getAsJsonObject();
+        JsonObject root = CODEC.encodeStart(registryOps, entries).getOrThrow(IllegalStateException::new).getAsJsonObject();
         list.add(DataProvider.writeToPath(writer, root, resolvePath()));
 
         return CompletableFuture.allOf(list.toArray(CompletableFuture[]::new));
@@ -79,37 +101,6 @@ public abstract class SoundProvider implements DataProvider
     private Path resolvePath()
     {
         return this.output.resolvePath(OutputType.RESOURCE_PACK).resolve(this.namespace).resolve("sounds.json");
-    }
-
-    private void addEntry(Identifier soundEventId, Builder builder)
-    {
-        String key = soundEventId.getPath();
-        SoundEntry entry = builder.build(soundEventId);
-
-        if (entries.containsKey(key))
-        {
-            entries.replace(key, mergeEntries(key, entry));
-        }
-        else
-        {
-            entries.put(key, entry);
-        }
-    }
-
-    private SoundEntry mergeEntries(String key, SoundEntry entry)
-    {
-        SoundEntry original = this.entries.get(key);
-
-        List<Identifier> sounds = original.sounds();
-        for (Identifier soundId: entry.sounds())
-        {
-            if (!sounds.contains(soundId))
-            {
-                sounds.add(soundId);
-            }
-        }
-
-        return new SoundEntry(entry.replace, entry.subtitle, sounds);
     }
 
     public Builder getOrCreateBuilder(SoundEvent soundEvent)
@@ -166,9 +157,32 @@ public abstract class SoundProvider implements DataProvider
             return this;
         }
 
+        public final Builder addSound(String... ids)
+        {
+            for (String id: ids)
+            {
+                addSound(id);
+            }
+
+            return this;
+        }
+
         public Builder addSound(String id)
         {
             return addSound(Identifier.of(this.namespace, id));
+        }
+
+        @SafeVarargs
+        public final Builder addSound(Identifier... ids)
+        {
+            for (Identifier id: ids)
+            {
+                // NOTE: Due to the nature of varargs we need to create
+                //       a new instance of Identifier to be safe.
+                addSound(Identifier.of(id.getNamespace(), id.getPath()));
+            }
+
+            return this;
         }
 
         public Builder addSound(Identifier id)

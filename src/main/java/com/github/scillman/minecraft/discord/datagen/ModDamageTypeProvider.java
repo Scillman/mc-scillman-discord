@@ -19,10 +19,10 @@ public class ModDamageTypeProvider extends DamageTypeProvider
     protected void generate()
     {
         getOrCreateBuilder(ModDamageTypes.DEMO_DAMAGE_TYPE_1)
-            .bypassesArmor();
+            .bypassArmor();
 
         getOrCreateBuilder(ModDamageTypes.DEMO_DAMAGE_TYPE_2)
-            .isFire()
+            .isFireDamage()
             .burnsArmorStands();
     }
 }

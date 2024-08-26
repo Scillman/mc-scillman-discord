@@ -17,6 +17,7 @@ import net.minecraft.data.DataWriter;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.data.DataOutput.OutputType;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryOps;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.TagKey;
@@ -74,8 +75,7 @@ public abstract class DamageTypeTagProvider implements DataProvider
     {
         return this.output.resolvePath(OutputType.DATA_PACK)
             .resolve(id.getNamespace())
-            .resolve("tags")
-            .resolve("damage_type") // RegistryKeys.DAMAGE_TYPE.getValue().getPath()
+            .resolve(RegistryKeys.getTagPath(RegistryKeys.DAMAGE_TYPE))
             .resolve(id.getPath() + ".json");
     }
 

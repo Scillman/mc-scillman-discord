@@ -19,6 +19,7 @@ import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.damage.DeathMessageType;
 import net.minecraft.data.DataOutput.OutputType;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryOps;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.DamageTypeTags;
@@ -94,7 +95,7 @@ public abstract class DamageTypeProvider implements DataProvider
      */
     private Path resolvePath(Identifier id)
     {
-        return this.output.getResolver(OutputType.DATA_PACK, "damage_type").resolveJson(id);
+        return this.output.getResolver(OutputType.DATA_PACK, RegistryKeys.getPath(RegistryKeys.DAMAGE_TYPE)).resolveJson(id);
     }
 
     public Builder getOrCreateBuilder(RegistryKey<DamageType> damageType)
@@ -180,55 +181,58 @@ public abstract class DamageTypeProvider implements DataProvider
         }
 
         /**
-         * This damage causes damage to an entity's helmet if worn.
+         * Causes damage to the helmet worn by entities taking damage of this type.
          * @return The builder.
          * @remarks Examples: falling anvil, falling block and falling stalactite.
          */
-        public Builder damagesHelmet()
+        public Builder doDamgeToHelmets()
         {
             this.tags.add(DamageTypeTags.DAMAGES_HELMET);
             return this;
         }
 
         /**
-         * This damage bypasses armor protectin.
+         * Bypasses protection provided by worn armors.
          * @return The builder.
          * @remarks Examples: fire, entity cramming, wither, freeze, etc.
          * @remarks This function will implicitly add it to {@link #bypassesShield()}.
          */
-        public Builder bypassesArmor()
+        public Builder bypassArmor()
         {
             this.tags.add(DamageTypeTags.BYPASSES_ARMOR);
             return this;
         }
 
         /**
-         * This damage bypasses shields.
+         * Bypasses protection provided by shields.
          * @return The builder.
          * @remarks Examples: falling anvil and falling stalactite.
          */
-        public Builder bypassesShield()
+        public Builder bypassShield()
         {
             this.tags.add(DamageTypeTags.BYPASSES_SHIELD);
             return this;
         }
 
         /**
-         * This damage bypasses invulnerability.
+         * Bypasses any invulnerability protection.
          * @return The builder.
          * @remarks Examples: out-of-world.
+         * @remarks Totem of Undying is a form of invulnerability protection.
          */
-        public Builder bypassesInvulnerability()
+        public Builder bypassInvulnerability()
         {
             this.tags.add(DamageTypeTags.BYPASSES_INVULNERABILITY);
             return this;
         }
 
         /**
-         * ???
+         * This damage is allowed to bypass the default cooldown.
          * @return The builder.
+         * @remarks Not to be used in official releases and seems to be purely for testing inside development environments.
+         * @remarks By default damage is accumulated up to a maximum over a given time delta, calling this function allows the damage to bypass this. It can be best envisioned as being similar to the hearts in-game which only take damage every 1s with status effects like Withering.
          */
-        public Builder bypassesCooldown()
+        public Builder bypassCooldown()
         {
             this.tags.add(DamageTypeTags.BYPASSES_COOLDOWN);
             return this;
@@ -239,7 +243,7 @@ public abstract class DamageTypeProvider implements DataProvider
          * @return The builder.
          * @remarks Examples: starvation.
          */
-        public Builder bypassesEffects()
+        public Builder bypassStatusEffects()
         {
             this.tags.add(DamageTypeTags.BYPASSES_EFFECTS);
             return this;
@@ -250,7 +254,7 @@ public abstract class DamageTypeProvider implements DataProvider
          * @return The builder.
          * @remarks Examples: out-of-world.
          */
-        public Builder bypassesResistance()
+        public Builder bypassResistance()
         {
             this.tags.add(DamageTypeTags.BYPASSES_RESISTANCE);
             return this;
@@ -261,102 +265,102 @@ public abstract class DamageTypeProvider implements DataProvider
          * @return The builder.
          * @remarks Examples: sonic boom. (aka warden sound attack.)
          */
-        public Builder bypassesEnchantments()
+        public Builder bypassEnchantments()
         {
             this.tags.add(DamageTypeTags.BYPASSES_ENCHANTMENTS);
             return this;
         }
 
         /**
-         * This damage is fire damage.
+         * Makes it so that this damage type is counted as fire damage.
          * @return The builder.
          * @remarks Examples: fire, campfire, lave, magma blocks and fireballs.
          */
-        public Builder isFire()
+        public Builder isFireDamage()
         {
             this.tags.add(DamageTypeTags.IS_FIRE);
             return this;
         }
 
         /**
-         * This damage is projectile damage.
+         * Makes it so that this damage type is counted as projectile damage.
          * @return The builder.
          * @remarks Examples: arrows, tridents, fireball, wither skulls and wind charges.
          */
-        public Builder isProjectile()
+        public Builder isProjectileDamage()
         {
             this.tags.add(DamageTypeTags.IS_PROJECTILE);
             return this;
         }
 
         /**
-         * This damage does not affect witches.
+         * Makes it so that this damage type does not affect witches.
          * @return The builder.
          * @remarks Examples: magic and thorns.
          */
-        public Builder witchResistantTo()
+        public Builder makeWitchResistantTo()
         {
             this.tags.add(DamageTypeTags.WITCH_RESISTANT_TO);
             return this;
         }
 
         /**
-         * This damage is of the explosion kind.
+         * Makes it so that this damage type is counted as explosion damage.
          * @return The builder.
          * @remarks Examples: fireworks and explosions.
          */
-        public Builder isExplosion()
+        public Builder isExplosionDamage()
         {
             this.tags.add(DamageTypeTags.IS_EXPLOSION);
             return this;
         }
 
         /**
-         * This damage is of the falling kind.
+         * Makes it so that this damage type is counted as fall damage.
          * @return The builder.
          * @remarks Examples: fall and stalagmite. (e.g. roof pointed dripstone falls onto entity)
          */
-        public Builder isFall()
+        public Builder isFallDamage()
         {
             this.tags.add(DamageTypeTags.IS_FALL);
             return this;
         }
 
         /**
-         * This damage is of the drowning kind.
+         * Makes it so that this damage type is counted as drown damage.
          * @return The builder.
          * @remarks Examples: drowning.
          */
-        public Builder isDrowning()
+        public Builder isDrownDamage()
         {
             this.tags.add(DamageTypeTags.IS_DROWNING);
             return this;
         }
 
         /**
-         * This damage is of the freezing kind.
+         * Makes it so that this damage type is counted as freeze damage.
          * @return The builder.
          * @remarks Examples: freeze.
          */
-        public Builder isFreezing()
+        public Builder isFreezeDamage()
         {
             this.tags.add(DamageTypeTags.IS_FREEZING);
             return this;
         }
 
         /**
-         * This damage is of the lightning type.
+         * Makes it so that this damage type is counted as lightning damage.
          * @return The builder.
          * @remarks Examples: lightning.
          */
-        public Builder isLightning()
+        public Builder isLightningDamage()
         {
             this.tags.add(DamageTypeTags.IS_LIGHTNING);
             return this;
         }
 
         /**
-         * This damage does not cause entities to become angry.
+         * Makes it so that this damage does not cause entities to become angry to the source entity.
          * @return The builder.
          * @remarks Examples: ??? (mob_attack_no_agro)
          */
@@ -367,7 +371,7 @@ public abstract class DamageTypeProvider implements DataProvider
         }
 
         /**
-         * ???
+         * Makes it so that this damage does not have an impact. (aka not changes the entity velocity)
          * @return The builder.
          * @remarks Examples: drown.
          */
@@ -378,9 +382,10 @@ public abstract class DamageTypeProvider implements DataProvider
         }
 
         /**
-         * This damage is always a lethal fall.
+         * Makes it so that this damage is always a lethal fall.
          * @return The builder.
          * @remarks Examples: out-of-world. (aka void)
+         * @remarks Cranks the done damage to the abosulte maximum possible.
          */
         public Builder alwaysMostSignificantFall()
         {
@@ -393,14 +398,14 @@ public abstract class DamageTypeProvider implements DataProvider
          * @return The builder.
          * @remarks Examples: drowning.
          */
-        public Builder witherImmuneTo()
+        public Builder makeWitherImmuneTo()
         {
             this.tags.add(DamageTypeTags.WITHER_IMMUNE_TO);
             return this;
         }
 
         /**
-         * This damage can cause an armor stand to catch fire.
+         * Makes it so that this damage type can cause an armor stand to catch fire.
          * @return The builder.
          * @remarks Examples: fire and campfires.
          */
@@ -411,7 +416,7 @@ public abstract class DamageTypeProvider implements DataProvider
         }
 
         /**
-         * This damage causes an armor stand to burn.
+         * Makes it so that this damage type causes an armor stand to burn.
          * @return The builder.
          * @remarks Examples: fire.
          */
