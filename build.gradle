@@ -78,25 +78,6 @@ tasks.withType(JavaCompile).configureEach {
     it.options.release.set(targetJavaVersion)
 }
 
-task.register("cacheToMavenLocal", Sync) {
-    from new File(gradle.gradleUserHomeDir, 'caches/modules-2/files-2.1')
-    into "${rootDir}/local-m2"
-
-    // Last copy target wins
-    duplicatesStrategy = 'include'
-
-    eachFile {
-        List<String> parts = it.path.split('/')
-        // Construct a maven repo file tree from the path
-        it.path = parts[0].replace('.','/') +
-            '/' + parts[1] +
-            '/' + parts[2] +
-            '/' + parts[4]
-    }
-
-    includeEmptyDirs false
-}
-
 java {
     withSourcesJar()
 
