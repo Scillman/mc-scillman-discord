@@ -44,7 +44,7 @@ public class ModLanguageProvider extends FabricLanguageProvider
 
         translationBuilder.add(ModBlocks.DEMO_BLOCK, "Demo Block");
         translationBuilder.add(ModItems.DEMO_ITEM, "Demo Item");
-        translationBuilder.add(ModItems.SPAWN_EGG_ITEM, "Demo Spawn Egg");
+        translationBuilder.add(ModItems.DEMO_SPAWN_EGG_ITEM, "Demo Spawn Egg");
     }
 
     /**
