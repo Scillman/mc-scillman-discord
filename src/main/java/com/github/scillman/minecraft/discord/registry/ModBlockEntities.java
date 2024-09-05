@@ -16,7 +16,7 @@ import net.minecraft.util.Identifier;
  */
 public final class ModBlockEntities
 {
-    public static final BlockEntityType<DemoBlockEntity> DEMO_BLOCK_ENTITY = register("demo_block_entity", DemoBlockEntity::new, ModBlocks.DEMO_BLOCK);
+    public static final BlockEntityType<DemoBlockEntity> DEMO_BLOCK_ENTITY = create("demo_block_entity", DemoBlockEntity::new, ModBlocks.DEMO_BLOCK);
 
     /**
      * Register a new block entity.
@@ -26,12 +26,25 @@ public final class ModBlockEntities
      * @param block The block the block entity is associated with.
      * @return The instance as registered with Minecraft registry.
      */
-    private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityFactory<T> factory, Block block)
+    private static <T extends BlockEntity> BlockEntityType<T> create(String id, BlockEntityFactory<T> factory, Block block)
+    {
+        return register(id, BlockEntityType.Builder.create(factory, block).build());
+    }
+
+    /**
+     * Register a new block entity.
+     * @param <T> The type of the block entity to register.
+     * @param id The id to register the block entity with.
+     * @param factory The function used to create create a new instance of the block entity.
+     * @param block The block the block entity is associated with.
+     * @return The instance as registered with Minecraft registry.
+     */
+    private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType<T> blockEntityType)
     {
         return Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
             Identifier.of(ModMain.MOD_ID, id),
-            BlockEntityType.Builder.create(factory, block).build()
+            blockEntityType
         );
     }
 

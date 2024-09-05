@@ -8,6 +8,7 @@ import com.github.scillman.minecraft.discord.registry.ModBlocks;
 import com.github.scillman.minecraft.discord.registry.ModDamageTypes;
 import com.github.scillman.minecraft.discord.registry.ModItemGroups;
 import com.github.scillman.minecraft.discord.registry.ModItems;
+import com.github.scillman.minecraft.discord.registry.ModRecipes;
 import com.github.scillman.minecraft.discord.registry.ModSounds;
 import com.github.scillman.minecraft.discord.registry.ModStatusEffects;
 import com.github.scillman.minecraft.discord.registry.VanillaBlockTags;
@@ -36,6 +37,7 @@ public class ModMain implements ModInitializer
         ModSounds.register();
         ModStatusEffects.register();
         ModDamageTypes.register();
+        ModRecipes.register();
 
         ModBlocks.register();
         ModBlockEntities.register();

@@ -16,7 +16,7 @@ import net.minecraft.util.Identifier;
  */
 public final class ModBlocks
 {
-    public static final DemoBlock DEMO_BLOCK = register("demo_block", DemoBlock::new,
+    public static final DemoBlock DEMO_BLOCK = create("demo_block", DemoBlock::new,
         AbstractBlock.Settings.create().requiresTool().hardness(8.0f));
 
     /**
@@ -26,9 +26,9 @@ public final class ModBlocks
      * @param factory The function to call to create an instance of the block.
      * @return The instance as registered with Minecraft registry.
      */
-    private static <T extends Block> T register(String id, BlockCreateFactory<T> factory)
+    private static <T extends Block> T create(String id, BlockCreateFactory<T> factory)
     {
-        return register(id, factory, true);
+        return create(id, factory, true);
     }
 
     /**
@@ -39,9 +39,9 @@ public final class ModBlocks
      * @param registerItem Set to true to register a {@link net.minecraft.item.BlockItem BlockItem} for the block; otherwise, false.
      * @return The instance as registered with Minecraft registry.
      */
-    private static <T extends Block> T register(String id, BlockCreateFactory<T> factory, boolean registerItem)
+    private static <T extends Block> T create(String id, BlockCreateFactory<T> factory, boolean registerItem)
     {
-        return register(id, factory, AbstractBlock.Settings.create(), registerItem);
+        return create(id, factory, AbstractBlock.Settings.create(), registerItem);
     }
 
     /**
@@ -52,9 +52,9 @@ public final class ModBlocks
      * @param settings The block settings to use.
      * @return The instance as registered with Minecraft registry.
      */
-    private static <T extends Block> T register(String id, BlockCreateFactory<T> factory, AbstractBlock.Settings settings)
+    private static <T extends Block> T create(String id, BlockCreateFactory<T> factory, AbstractBlock.Settings settings)
     {
-        return register(id, factory, settings, true);
+        return create(id, factory, settings, true);
     }
 
     /**
@@ -66,9 +66,21 @@ public final class ModBlocks
      * @param registerItem Set to true to register a {@link net.minecraft.item.BlockItem BlockItem} for the block; otherwise, false.
      * @return The instance as registered with Minecraft registry.
      */
-    private static <T extends Block> T register(String id, BlockCreateFactory<T> factory, AbstractBlock.Settings settings, boolean registerItem)
+    private static <T extends Block> T create(String id, BlockCreateFactory<T> factory, AbstractBlock.Settings settings, boolean registerItem)
     {
         return register(id, factory.create(settings), registerItem);
+    }
+
+    /**
+     * Register a custom block.
+     * @param <T> The type of the block to register.
+     * @param id The id to register the block with.
+     * @param block The block to register.
+     * @return The instance as registered with Minecraft registry.
+     */
+    private static <T extends Block> T register(String id, T block)
+    {
+        return register(id, block, true);
     }
 
     /**
