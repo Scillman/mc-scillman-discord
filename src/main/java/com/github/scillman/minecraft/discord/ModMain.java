@@ -40,11 +40,11 @@ public class ModMain implements ModInitializer
         ModDamageTypes.register();
         ModRecipes.register();
 
+        ModEntities.register();
+
         ModBlocks.register();
         ModBlockEntities.register();
         ModItems.register();
         ModItemGroups.register();
-
-        ModEntities.register();
     }
 }

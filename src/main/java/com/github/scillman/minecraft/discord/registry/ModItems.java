@@ -3,7 +3,6 @@ package com.github.scillman.minecraft.discord.registry;
 import com.github.scillman.minecraft.discord.ModMain;
 import com.github.scillman.minecraft.discord.item.DemoItem;
 
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registry;
@@ -19,7 +18,7 @@ public final class ModItems
     public static final DemoItem DEMO_ITEM = create("demo_item", DemoItem::new);
 
     public static final Item DEMO_SPAWN_EGG_ITEM = register("demo_spawn_egg", new SpawnEggItem(
-        EntityType.ALLAY,
+        ModEntities.DEMO,
         ColorHelper.Argb.getArgb(255, 0, 0),
         ColorHelper.Argb.getArgb(0, 0, 255),
         new Item.Settings()
