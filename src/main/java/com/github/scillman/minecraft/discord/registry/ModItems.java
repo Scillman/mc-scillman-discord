@@ -16,9 +16,8 @@ import net.minecraft.registry.Registries;
  */
 public final class ModItems
 {
-    public static final DemoItem DEMO_ITEM = create("demo_item", DemoItem::new); // String, ItemCreateFactory<DemoItem> == String, DemoItem
+    public static final DemoItem DEMO_ITEM = create("demo_item", DemoItem::new);
 
-    // (EntityType<? extends MobEntity> type, int primaryColor, int secondaryColor, Item.Settings settings)
     public static final Item DEMO_SPAWN_EGG_ITEM = register("demo_spawn_egg", new SpawnEggItem(
         EntityType.ALLAY,
         ColorHelper.Argb.getArgb(255, 0, 0),

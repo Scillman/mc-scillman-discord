@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.github.scillman.minecraft.discord.registry.ModBlockEntities;
 import com.github.scillman.minecraft.discord.registry.ModBlocks;
 import com.github.scillman.minecraft.discord.registry.ModDamageTypes;
+import com.github.scillman.minecraft.discord.registry.ModEntities;
 import com.github.scillman.minecraft.discord.registry.ModItemGroups;
 import com.github.scillman.minecraft.discord.registry.ModItems;
 import com.github.scillman.minecraft.discord.registry.ModRecipes;
@@ -43,5 +44,7 @@ public class ModMain implements ModInitializer
         ModBlockEntities.register();
         ModItems.register();
         ModItemGroups.register();
+
+        ModEntities.register();
     }
 }
